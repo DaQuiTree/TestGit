@@ -172,6 +172,14 @@ let g:ycm_semantic_triggers =  {
 			\ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
 			\ 'cs,lua,javascript': ['re!\w{2}'],
 			\ }
+"定义/实现切换
+nnoremap <leader>jc :YcmCompleter GoToDeclaration<CR>
+" 只能是 #include 或已打开的文件
+nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
+
+"快捷查找
+" 使用 ctrlsf.vim 插件在工程内全局查找光标所在关键字，设置快捷键。快捷键速记法：search in project
+nnoremap <Leader>sp :CtrlSF<CR>
 
 " 设置 gvim 显示字体
 " set guifont=YaHei\ Consolas\ Hybrid\ 11.5
@@ -273,4 +281,10 @@ set undofile
 map <leader>ss :mksession! my.vim<cr> :wviminfo! my.viminfo<cr>
 " 恢复快捷键
 map <leader>rs :source my.vim<cr> :rviminfo my.viminfo<cr>
+
+" 调整窗口大小
+nmap w= :resize +3<CR>
+nmap w- :resize -3<CR>
+nmap w, :vertical resize -3<CR>
+nmap w. :vertical resize +3<CR>
 
