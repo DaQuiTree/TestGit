@@ -1,0 +1,12 @@
+{
+ "localaddr": ":1080",
+ "remoteaddr": "138.128.197.191:8989",
+ "key": "test",
+ "crypt": "aes-128",
+ "mode": "fast2",
+ "conn": 1,
+ "mtu": 1350,
+ "sndwnd": 128,
+ "rcvwnd": 1024,
+ "nocomp": false
+}
