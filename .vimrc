@@ -10,6 +10,8 @@ source ~/.vim_runtime/my_configs.vim
 catch
 endtry
 
+let g:go_version_warning = 0
+
 "开启快捷键的前缀
 
 let mapleader=";"
@@ -104,7 +106,7 @@ call vundle#end()
 filetype plugin indent on
 
 " 配色方案
-"set background=dark
+set background=dark
 "colorscheme solarized
 "colorscheme molokai
 "colorscheme phd
@@ -142,8 +144,10 @@ set number
 " 高亮显示搜索结果
 set hlsearch
 
+"""""""""""""""""""""""" YCM """"""""""""""""""""""""""""""""
 ".ycm_extra_conf.py
 let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
+
 " YCM 补全菜单配色
 " 菜单
 highlight Pmenu ctermfg=2 ctermbg=3 guifg=#005f87 guibg=#EEE8D5
@@ -155,14 +159,30 @@ let g:ycm_complete_in_comments=1
 let g:ycm_confirm_extra_conf=0
 " 开启 YCM 标签补全引擎
 let g:ycm_collect_identifiers_from_tags_files=1
+
 " 引入 C++ 标准库tags
 set tags+=/data/misc/software/misc./vim/stdcpp.tags
 " YCM 集成 OmniCppComplete 补全引擎，设置其快捷键
 inoremap <leader>; <C-x><C-o>
 " 补全内容不以分割子窗口形式出现，只显示补全列表
 set completeopt-=preview
+" 关闭YCM自带诊断
+let g:ycm_show_diagnostics_ui = 0
+" YCM白名单
+let g:ycm_filetype_whitelist = { 
+			\ "c":1,
+			\ "cpp":1, 
+			\ "objc":1,
+			\ "sh":1,
+			\ "zsh":1,
+			\ "zimbu":1,
+			\ }
+
 " 从第一个键入字符就开始罗列匹配项
-let g:ycm_min_num_of_chars_for_completion=1
+let g:ycm_min_num_of_chars_for_completion=2
+" 基于语义补全触发Ctrl+z
+let g:ycm_key_invoke_completion = '<c-z>'
+
 " 禁止缓存匹配项，每次都重新生成匹配项
 let g:ycm_cache_omnifunc=0
 " 语法关键字补全			
@@ -176,6 +196,8 @@ let g:ycm_semantic_triggers =  {
 nnoremap <leader>jc :YcmCompleter GoToDeclaration<CR>
 " 只能是 #include 或已打开的文件
 nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
+
+"""""""""""""""""""""""" YCM """"""""""""""""""""""""""""""""
 
 "快捷查找
 " 使用 ctrlsf.vim 插件在工程内全局查找光标所在关键字，设置快捷键。快捷键速记法：search in project
@@ -288,3 +310,20 @@ nmap w- :resize -3<CR>
 nmap w, :vertical resize -3<CR>
 nmap w. :vertical resize +3<CR>
 
+""""""""""""tags系统""""""""""""""""""
+
+" 正向遍历同名标签
+nmap <Leader>tn :tnext<CR>
+" 反向遍历同名标签
+nmap <Leader>tp :tprevious<CR>
+
+" 设置插件 indexer 调用 ctags 的参数
+" 默认 --c++-kinds=+p+l，重新设置为 --c++-kinds=+p+l+x+c+d+e+f+g+m+n+s+t+u+v
+" 默认 --fields=+iaS 不满足 YCM 要求，需改为 --fields=+iaSl
+let g:indexer_ctagsCommandLineOptions="--c++-kinds=+p+l+x+c+d+e+f+g+m+n+s+t+u+v --fields=+iaSl --extra=+q"
+
+""""""""""""""""""""""""""""""""""""""""""
+
+" multiple-cursors
+let g:multi_cursor_next_key='<C-n>'
+let g:multi_cursor_skip_key='<C-k>'
