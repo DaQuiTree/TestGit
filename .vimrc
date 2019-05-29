@@ -36,7 +36,7 @@ nmap <Leader>p "+p
 " 定义快捷键关闭当前分割窗口
 nmap <Leader>q :q<CR>
 " 定义快捷键保存当前窗口内容
-nmap <Leader>w :w<CR>
+nmap <Leader>w :wa<CR>
 " 定义快捷键保存所有窗口内容并退出 vim
 nmap <Leader>WQ :wa<CR>:q<CR>
 " 不做任何保存，直接退出 vim
@@ -101,6 +101,7 @@ Plugin 'sjl/gundo.vim'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'suan/vim-instant-markdown'
 Plugin 'lilydjwg/fcitx.vim'
+Plugin 'rdnetto/YCM-Generator'
 " 插件列表结束
 call vundle#end()
 filetype plugin indent on
@@ -167,7 +168,7 @@ inoremap <leader>; <C-x><C-o>
 " 补全内容不以分割子窗口形式出现，只显示补全列表
 set completeopt-=preview
 " 关闭YCM自带诊断
-let g:ycm_show_diagnostics_ui = 0
+let g:ycm_show_diagnostics_ui = 0 
 " YCM白名单
 let g:ycm_filetype_whitelist = { 
 			\ "c":1,
@@ -305,10 +306,10 @@ map <leader>ss :mksession! my.vim<cr> :wviminfo! my.viminfo<cr>
 map <leader>rs :source my.vim<cr> :rviminfo my.viminfo<cr>
 
 " 调整窗口大小
-nmap w= :resize +3<CR>
-nmap w- :resize -3<CR>
-nmap w, :vertical resize -3<CR>
-nmap w. :vertical resize +3<CR>
+nmap w= :resize +10<CR>
+nmap w- :resize -10<CR>
+nmap w, :vertical resize -10<CR>
+nmap w. :vertical resize +10<CR>
 
 """"""""""""tags系统""""""""""""""""""
 
@@ -321,9 +322,21 @@ nmap <Leader>tp :tprevious<CR>
 " 默认 --c++-kinds=+p+l，重新设置为 --c++-kinds=+p+l+x+c+d+e+f+g+m+n+s+t+u+v
 " 默认 --fields=+iaS 不满足 YCM 要求，需改为 --fields=+iaSl
 let g:indexer_ctagsCommandLineOptions="--c++-kinds=+p+l+x+c+d+e+f+g+m+n+s+t+u+v --fields=+iaSl --extra=+q"
+let g:indexer_disableCtagsWarning=1
 
 """"""""""""""""""""""""""""""""""""""""""
 
 " multiple-cursors
 let g:multi_cursor_next_key='<C-n>'
 let g:multi_cursor_skip_key='<C-k>'
+
+" ctrlp.vim
+set runtimepath^=~/.vim/bundle/ctrlp.vim
+let g:ctrlp_map = '<c-p>' 
+let g:ctrlp_cmd = 'CtrlP'
+" 设置过滤不进行查找的后缀名 
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|pyc)$'
+
+
+"tarbar预览
+nmap <F8> :TagbarToggle<CR>
