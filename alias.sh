@@ -15,3 +15,7 @@ git config --global https.proxy socks5://127.0.0.1:1080
 
 #加入/etc/rc.local
 #su - daqui -c "/home/daqui/bin/overgate"
+
+#全局.gitignore
+git config --global core.excludesfile ~/.gitignore_global
+
