@@ -1,0 +1,24 @@
+use_vim_as_ide步骤：
+1、卸载系统自带vi、vim
+2、源码安装vim 注意目前的YCM仅支持python3.6+的vim
+源码安装python3.6
+./configure --with-features=huge --enable-pythoninterp=yes --enable-python3interp=yes --enable-rubyinterp=yes --enable-luainterp=yes --enable-perlinterp=yes --with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu/ --with-python3-config-dir=/usr/local/lib/python3.6/config-3.6m-x86_64-linux-gnu/ --enable-gui=gtk2 --enable-cscope --prefix=/usr
+3、安装awesome_vimrc
+4、拷贝其他use_vim_as_ide中的.vimrc内容
+5、安装ctags(indexer) ack ag(ctrlsf)
+6、YouCompleteMe
+(0)先在buddle里安装youcompleteme
+(1)按照use_vim_as_ide安装，可使用proxychains进行代理
+/etc/proxychains.conf  socks5 127.0.0.1 1080
+bash proxychains
+(2)复制.ycm_extra_conf.py到~/.vim下
+(3).bashrc中加入 alias conf_gen='~/.vim/bundle/YCM-Generator/config_gen.py'
+(4)可以尝试其他方式安装YCM
+
+7、将proj里的complier设置软连接在YCM_generator/fake_toolchains
+ex:ln -s arm-hisiv400-g++ g++
+
+8、对于indexer 建立.indexer_files文件
+
+
+

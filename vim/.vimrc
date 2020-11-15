@@ -28,6 +28,7 @@ nmap LE $
 
 "设置快捷键将选中文本块复制至系统剪贴板
 vnoremap <Leader>y "+y
+
 "设置缩进快捷键
 vnoremap <Leader>H <
 vnoremap <Leader>L >
@@ -132,7 +133,6 @@ map <silent> <F11> :call ToggleFullscreen()<CR>
 " 启动 vim 时自动全屏
 autocmd VimEnter * call ToggleFullscreen()
 
-
 " 总是显示状态栏
 set laststatus=2
 " 显示光标当前位置
@@ -140,12 +140,16 @@ set ruler
 " 开启行号显示
 set number
 " 高亮显示当前行/列
-"set cursorline
-"set cursorcolumn
+set cursorline
+set cursorcolumn
 " 高亮显示搜索结果
 set hlsearch
 
 """""""""""""""""""""""" YCM """"""""""""""""""""""""""""""""
+"
+"let g:ycm_server_python_interpreter='/usr/bin/python2.7'
+let g:ycm_server_python_interpreter='/usr/local/bin/python3.6'
+
 ".ycm_extra_conf.py
 let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
 
