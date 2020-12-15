@@ -1,15 +1,17 @@
 #!/bin/bash
 
-set $(ls -l ~/RKSDK/rk3326/buildroot/output/rockchip_rk3326_robot64/build/ecl_core-0.6.18/ | grep "^d" | awk '{print $9}' |grep -wv "ecl_core")
+Tar_path=/home/daquitree/Downloads/ecl_lite-0.61.6/
 
-Module_path="ecl_core"
-Hash_name="ecl_core.hash"
-Pkg_version="0.6.18"
-Archive_path="https://github.com/ros/ros/archive"
+set $(ls -l $Tar_path | grep "^d" | awk '{print $9}' |grep -wv "ecl_lite")
+
+Module_path="ecl_lite"
+Hash_name="ecl_lite.hash"
+Pkg_version="0.61.6"
+Archive_path="https://github.com/stonier/ecl_lite/archive"
 
 echoGConfigIn()
 {
-echo source \"package/rockchip/ros/ecl_core/$1/Config.in\" >> Config.in
+echo source \"package/rockchip/ros/$Module_path/$1/Config.in\" >> Config.in
 }
 
 touchConfigIn()
