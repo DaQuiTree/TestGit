@@ -1,0 +1,62 @@
+#!/bin/bash
+
+set $(ls -l ~/RKSDK/rk3326/buildroot/output/rockchip_rk3326_robot64/build/ecl_core-0.6.18/ | grep "^d" | awk '{print $9}' |grep -wv "ecl_core")
+
+Module_path="ecl_core"
+Hash_name="ecl_core.hash"
+Pkg_version="0.6.18"
+Archive_path="https://github.com/ros/ros/archive"
+
+echoGConfigIn()
+{
+echo source \"package/rockchip/ros/ecl_core/$1/Config.in\" >> Config.in
+}
+
+touchConfigIn()
+{
+typeset -u upper
+upper="$1"
+cat >$1/Config.in <<!FUNKY!	
+config BR2_PACKAGE_$upper
+    bool "$1"
+    help
+      "$1" 
+!FUNKY!
+}
+
+copyRenameHash()
+{
+cp $Module_path/$Hash_name $1/$1.hash
+}
+
+editMK()
+{
+typeset -u upper
+upper="$1"
+cat >$1/$1.mk <<!FUNKY!
+#default to KINETIC
+${upper}_VERSION = $Pkg_version
+
+${upper}_SOURCE = \$(${upper}_VERSION).tar.gz
+${upper}_SITE = $Archive_path
+${upper}_SUBDIR = $1
+
+#${upper}_DEPENDENCIES = bash findutils
+
+\$(eval \$(catkin-package))
+
+!FUNKY!
+}
+
+while [ "$1" != "" ]; do
+	mkdir $1
+	echoGConfigIn $1
+	touchConfigIn $1
+	copyRenameHash $1
+	editMK $1
+	#rm -rf $1
+	shift
+done
+
+exit 0
+
