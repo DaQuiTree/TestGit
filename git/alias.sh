@@ -23,3 +23,7 @@ git config --global core.excludesfile ~/.gitignore_global
 export http_proxy=socks5://127.0.0.1:1080
 export https_proxy=socks5://127.0.0.1:1080
 
+#git daemon
+# git config --global alias.serve '!git daemon --base-path=. --export-all --reuseaddr --informative-errors --verbose'
+# git config --global alias.hub '!git daemon --base-path=. --export-all --enable=receive-pack --reuseaddr --informative-errors --verbose'
+
